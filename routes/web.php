@@ -6,7 +6,8 @@ use App\Livewire\Stock\Product\ProductList;
 use App\Livewire\Stock\Product\ProductForm;
 use App\Livewire\Stock\Category\CategoryList;
 use App\Livewire\Stock\Category\CategoryForm;
-
+use App\Livewire\Stock\Movement\StockMovementForm;
+use App\Livewire\Stock\Movement\StockMovementList;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,11 +28,17 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('stock/products', ProductList::class)->name('stock.products');
+    Route::get('stock/product/{categoryId}', ProductList::class)->name('stock.products.category');
     Route::get('stock/products/create', ProductForm::class)->name('stock.products.create');
 
     // Category routes
     Route::get('stock/categories', CategoryList::class)->name('stock.categories');
     Route::get('stock/categories/create', CategoryForm::class)->name('stock.categories.create');
+
+    // Stock Movement routes
+    Route::get('stock/movements', StockMovementList::class)->name('stock.movements');
+    Route::get('stock/movements/create', StockMovementForm::class)->name('stock.movements.create');    
+
 });
 
 

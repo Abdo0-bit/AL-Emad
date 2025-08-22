@@ -1,5 +1,10 @@
 <div class="max-w-xl mx-auto p-6 bg-white dark:bg-gray-800 rounded shadow">
     <div>
+        @if (session()->has('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                <span class="block sm:inline">{{ session('success') }}</span>
+            </div>
+        @endif
         <form wire:submit='save' class="space-y-6">
             <div>
                 <label for="name" class="block mb-1 font-medium text-gray-700 dark:text-gray-200">اسم المنتج</label>

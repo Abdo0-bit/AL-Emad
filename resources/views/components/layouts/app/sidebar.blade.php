@@ -27,7 +27,8 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group :heading="__('الفئات')" class="grid">
-                <flux:navlist.item icon="squares-plus" :href="route('stock.categories.create')" :current="request()->routeIs('stock.categories.create')" wire:navigate>{{ __('إضافة فئة') }}</flux:navlist.item>
+                <flux:navlist.item icon="queue-list" :href="route('stock.categories.create')" :current="request()->routeIs('stock.categories.create')" wire:navigate>{{ __('إضافة فئة') }}</flux:navlist.item>
+                <flux:navlist.item icon="arrows-pointing-out" :href="route('stock.categories')" :current="request()->routeIs('stock.categories')" wire:navigate>{{ __('عرض الفئات')}}</flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
 

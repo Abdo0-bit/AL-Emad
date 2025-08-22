@@ -11,7 +11,7 @@ class CategoryForm extends Component
 {
     #[Validate('required|string|max:255')]
     public $name;
-    #[Validate('required|string|max:255')]
+    #[Validate('nullable|string|max:255')]
     public $description;
 
     public function mount($category = null)
@@ -31,8 +31,9 @@ class CategoryForm extends Component
             'description' => $this->description,
         ]);
 
-        session()->flash('message', 'تمت إضافة الفئة بنجاح.');
-        return redirect()->route('stock.categories');
+        session()->flash('success', 'تمت إضافة الفئة بنجاح.');
+
+        $this->reset();
     }
 
 

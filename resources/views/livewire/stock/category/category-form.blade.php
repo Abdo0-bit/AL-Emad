@@ -1,5 +1,11 @@
 <div class="bg-white dark:bg-gray-900 p-6 rounded shadow">
-    <form wire.submit='save'>
+    @if (session()->has('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+            role="alert">
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+    <form wire:submit.prevent="save">
         <div class="mb-4">
             <label for="name" class="block text-gray-700 dark:text-gray-200 mb-1">اسم الفئة</label>
             <input type="text" id="name" wire:model.defer='name' required
