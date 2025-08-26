@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{
+    darkMode: localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+}" x-init="darkMode && document.documentElement.classList.add('dark')" :class="{ 'dark': darkMode }">
 
 <head>
     @include('partials.head')
@@ -14,35 +16,28 @@
         </a>
 
         <flux:navlist variant="outline">
-            <flux:navlist.group :heading="__('Platform')" class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+            <flux:navlist.group :heading="__('نظام الديون')" class="grid">
+                <flux:navlist.item icon="pencil-square" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('الصفحة الرئيسية') }}</flux:navlist.item>
+                <flux:navlist.item icon="users" :href="route('debts.customers')" :current="request()->routeIs('debts.customers')" wire:navigate>{{ __('عرض العملاء') }}</flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
 
         <flux:navlist variant="outline">
-            <flux:navlist.group :heading="__('المنتجات')" class="grid">
-                <flux:navlist.item icon="squares-plus" :href="route('stock.products.create')" :current="request()->routeIs('stock.products.create')" wire:navigate>{{ __('إضافة منتج') }}</flux:navlist.item>
+            <flux:navlist.group :heading="__('المخزون')" class="grid">
+                <flux:navlist.item icon="arrows-right-left" :href="route('stock.movements.create')" :current="request()->routeIs('stock.movements.create')" wire:navigate>{{ __('تسجيل معاملات المخزون') }}</flux:navlist.item>
+                <flux:navlist.item icon="table-cells" :href="route('stock.movements')" :current="request()->routeIs('stock.movements')" wire:navigate>{{ __('عرض معاملات المخزون') }}</flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
 
         <flux:navlist variant="outline">
-            <flux:navlist.group :heading="__('الفئات')" class="grid">
+            <flux:navlist.group :heading="__('خاص بنظام المخزون')" class="grid">
                 <flux:navlist.item icon="queue-list" :href="route('stock.categories.create')" :current="request()->routeIs('stock.categories.create')" wire:navigate>{{ __('إضافة فئة') }}</flux:navlist.item>
+                <flux:navlist.item icon="squares-plus" :href="route('stock.products.create')" :current="request()->routeIs('stock.products.create')" wire:navigate>{{ __('إضافة منتج') }}</flux:navlist.item>
                 <flux:navlist.item icon="arrows-pointing-out" :href="route('stock.categories')" :current="request()->routeIs('stock.categories')" wire:navigate>{{ __('عرض الفئات')}}</flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
 
         <flux:spacer />
-
-        <flux:navlist variant="outline">
-            <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
-                {{ __('Repository') }}
-            </flux:navlist.item>
-
-            <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits#livewire" target="_blank">
-                {{ __('Documentation') }}
-            </flux:navlist.item>
-        </flux:navlist>
 
         <!-- Desktop User Menu -->
         <flux:dropdown class="hidden lg:block" position="bottom" align="start">

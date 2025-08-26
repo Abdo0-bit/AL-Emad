@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Debt\DebtList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Livewire\Stock\Product\ProductList;
@@ -8,6 +9,8 @@ use App\Livewire\Stock\Category\CategoryList;
 use App\Livewire\Stock\Category\CategoryForm;
 use App\Livewire\Stock\Movement\StockMovementForm;
 use App\Livewire\Stock\Movement\StockMovementList;
+use App\Livewire\Debt\CustomerDebt;
+use App\Livewire\Debt\DebtManage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,7 +40,12 @@ Route::middleware('auth')->group(function () {
 
     // Stock Movement routes
     Route::get('stock/movements', StockMovementList::class)->name('stock.movements');
-    Route::get('stock/movements/create', StockMovementForm::class)->name('stock.movements.create');    
+    Route::get('stock/movements/create', StockMovementForm::class)->name('stock.movements.create');
+    
+    // debt routes
+    Route::get('debts/customers', DebtList::class)->name('debts.customers');
+    Route::get('debts/customer/{customer}', CustomerDebt::class)->name('debts.customer');
+    Route::get('debts/manage', DebtManage::class)->name('debts.manage');
 
 });
 
